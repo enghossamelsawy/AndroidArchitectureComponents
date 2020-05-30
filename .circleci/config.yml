@@ -124,22 +124,22 @@ workflows:
   version: 2
   check:
     jobs:
-      - update_dependency_cache
-          - lint:
-          requires:
-            - update_dependency_cache
-        #      - detekt:
-        #          requires:
-        #            - update_dependency_cache
-        #      - ktlint:
-        #          requires:
-        #            - update_dependency_cache
-          - unit_test:
-              requires:
-                - update_dependency_cache
+#      - update_dependency_cache
+      #          - lint:
+      #          requires:
+      #            - update_dependency_cache
+      #        #      - detekt:
+      #        #          requires:
+      #        #            - update_dependency_cache
+      #        #      - ktlint:
+      #        #          requires:
+      #        #            - update_dependency_cache
+      #          - unit_test:
+      #              requires:
+      #                - update_dependency_cache
       - build_app:
           requires:
             - lint
-            - detekt
-            - ktlint
+            #            - detekt
+            #            - ktlint
             - unit_test
