@@ -32,6 +32,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BaseUrl", "\"https://api.github.com/\"")
+
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -39,6 +41,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BaseUrl", "\"https://api.github.com/\"")
         }
     }
     compileOptions {
@@ -67,6 +70,8 @@ dependencies {
     implementation(LibraryDependency.CORE_KTX)
     implementation(LibraryDependency.CROP)
     implementation(LibraryDependency.GLIDE)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
     kapt(LibraryDependency.GLIDE_COMPILAR)
     implementation(LibraryDependency.LIVE_DATA_RUNTIME)
     kapt(LibraryDependency.LIVE_DATA_COMPILER)
