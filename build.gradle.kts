@@ -22,6 +22,7 @@ buildscript {
         classpath(kotlin(GradleClasspath.KOTLIN_PlUGIN, version = CoreVersion.KOTLIN))
         classpath(GradleClasspath.SAFE_ARGS)
         classpath(GradleClasspath.KTLINT_CLASSPATH)
+        "classpath"("com.android.tools.build:gradle:4.0.0")
     }
 }
 
