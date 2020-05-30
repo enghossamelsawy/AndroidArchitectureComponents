@@ -29,6 +29,7 @@
 #      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
 #          path: app/build/test-results
 #      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+
 version: 2.1
 
 references:
@@ -77,28 +78,28 @@ jobs:
           command: ./gradlew androidDependencies
       - save-gradle-cache
 
-  #  ktlint:
-  #    <<: *container_config
-  #    steps:
-  #      - checkout
-    #      - restore-gradle-cache
-    #      - run: ./gradlew ktlintCheck
-    #
-    #  detekt:
-    #    <<: *container_config
-    #    steps:
-    #      - checkout
-    #      - restore-gradle-cache
-    #      - run: ./gradlew detekt
-    #
-    lint:
-      <<: *container_config
-      steps:
-        - checkout
-        - restore-gradle-cache
-        # pure "lint" gradle task should be avoided because it is parent task for lintDebug and lintRelease (it runs lint
-        # multiple times for each build variant). We want to run "lintDebug" task, because it's faster.
-        - run: ./gradlew lintDebug
+  ktlint:
+    <<: *container_config
+    steps:
+      - checkout
+      - restore-gradle-cache
+      - run: ./gradlew ktlintCheck
+
+  detekt:
+    <<: *container_config
+    steps:
+      - checkout
+      - restore-gradle-cache
+      - run: ./gradlew detekt
+
+  lint:
+    <<: *container_config
+    steps:
+      - checkout
+      - restore-gradle-cache
+      # pure "lint" gradle task should be avoided because it is parent task for lintDebug and lintRelease (it runs lint
+      # multiple times for each build variant). We want to run "lintDebug" task, because it's faster.
+      - run: ./gradlew lintDebug
 
   unit_test:
     <<: *container_config
@@ -124,22 +125,22 @@ workflows:
   version: 2
   check:
     jobs:
-#      - update_dependency_cache
-      #          - lint:
-      #          requires:
-      #            - update_dependency_cache
-      #        #      - detekt:
-      #        #          requires:
-      #        #            - update_dependency_cache
-      #        #      - ktlint:
-      #        #          requires:
-      #        #            - update_dependency_cache
-      #          - unit_test:
-      #              requires:
-      #                - update_dependency_cache
+      - update_dependency_cache
+      - lint:
+          requires:
+            - update_dependency_cache
+      - detekt:
+          requires:
+            - update_dependency_cache
+      - ktlint:
+          requires:
+            - update_dependency_cache
+      - unit_test:
+          requires:
+            - update_dependency_cache
       - build_app:
           requires:
             - lint
-            #            - detekt
-            #            - ktlint
+            - detekt
+            - ktlint
             - unit_test
