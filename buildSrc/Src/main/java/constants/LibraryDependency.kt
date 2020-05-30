@@ -6,7 +6,7 @@ object LibraryDependency {
         const val CORE_KTX = "1.2.0"
         const val COLLECTION_KTX = "1.1.0"
         const val APPCOMPAT_LIB = "1.1.0"
-        const val MATERIAL_LIB = "1.2.0-alpha06"
+        const val MATERIAL_LIB = "1.2.0-beta01"
         const val CONSTRAINT = "1.1.3"
         const val CROP = "2.8.0"
         const val KOIN = "2.0.1"
