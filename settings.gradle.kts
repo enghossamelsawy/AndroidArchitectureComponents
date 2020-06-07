@@ -1,3 +1,3 @@
-
 rootProject.name = "AndroidArchitectureComponents"
-include(":app")
+rootProject.buildFileName = "build.gradle.kts"
+include(":app", "AndroidArchitectureComponents_buildSrc")
